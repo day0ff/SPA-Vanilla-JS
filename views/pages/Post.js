@@ -1,7 +1,8 @@
+import {Component} from '../../comonent/Component.js';
 import {router} from '../../router/Router.js'
 import {jsonPlaceholder} from '../../services/json.placeholder.js';
 
-class Post {
+class Post extends Component{
     async render(){
         let request = router.parseRequestURL();
         let post = await jsonPlaceholder.getPost(request.id).then(response => response.json());

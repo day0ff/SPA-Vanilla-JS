@@ -1,6 +1,7 @@
+import {Component} from '../../comonent/Component.js';
 import {jsonPlaceholder} from '../../services/json.placeholder.js';
 
-class Home {
+class Home extends Component{
     async render() {
         let posts = await jsonPlaceholder.getPosts().then(response => response.json());
 
@@ -15,7 +16,7 @@ class Home {
     }
 
     afterRender(){
-        alert('Complete');
+        console.log('Execute after render method.');
     }
 
 }

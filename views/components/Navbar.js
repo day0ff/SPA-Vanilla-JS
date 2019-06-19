@@ -1,6 +1,8 @@
-let Navbar = {
-    render: async () => {
-        let view = `
+import {Component} from '../../comonent/Component.js';
+
+class Navbar extends Component {
+    async render() {
+        return `
             <nav class="navbar" role="navigation" aria-label="main navigation">
                 <a class="navbar-item" href="/#/home">
                     Home
@@ -10,8 +12,7 @@ let Navbar = {
                 </a>         
             </nav>
         `;
-        return view
     }
-};
+}
 
 export default Navbar;

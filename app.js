@@ -13,24 +13,15 @@ const routes = {
 
 router.routes = routes;
 
-const parseHTML = (content) =>{
-    if(typeof content === 'string' )
-      return new DOMParser().parseFromString(content, "text/html");
-    return content;
-};
-
 const App = async () => {
-    const page = router.page;
 
     const header = null || document.querySelector('header');
-    const content = null || document.querySelector('article');
+    const article = null || document.querySelector('article');
     const footer = null || document.querySelector('footer');
 
-    header.innerHTML = await Navbar.render();
+    await new Navbar().parent(header);
+    await router.component.parent(article);
     footer.innerHTML = null;
-
-    content.innerHTML = await page.render();
-    page.afterRender && await page.afterRender();
 
 };
 
