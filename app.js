@@ -13,7 +13,15 @@ const routes = {
 
 router.routes = routes;
 
+const parseHTML = (content) =>{
+    if(typeof content === 'string' )
+      return new DOMParser().parseFromString(content, "text/html");
+    return content;
+};
+
 const App = async () => {
+    const page = router.page;
+
     const header = null || document.querySelector('header');
     const content = null || document.querySelector('article');
     const footer = null || document.querySelector('footer');
@@ -21,7 +29,9 @@ const App = async () => {
     header.innerHTML = await Navbar.render();
     footer.innerHTML = null;
 
-    content.innerHTML = await router.page.render();
+    content.innerHTML = await page.render();
+    page.afterRender && await page.afterRender();
+
 };
 
 window.addEventListener('hashchange', App);

@@ -8,13 +8,14 @@ class Home {
             <section class="section">
                 <h1> Home </h1>
                 <ul>
-                    ${ posts.map(post =>
-            `<li><a href="#/post/${post.id}">${post.title}</a></li>`
-        ).join('\n ')
-            }
+                    ${ posts.map(post => `<li><a href="#/post/${post.id}">${post.title}</a></li>`).join('\n ')}
                 </ul>
             </section>
         `;
+    }
+
+    afterRender(){
+        alert('Complete');
     }
 
 }
