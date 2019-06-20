@@ -1,4 +1,4 @@
-import {Component} from '../../comonent/Component.js';
+import {Component} from '../../spa-engine/Component.js';
 
 class Navbar extends Component {
     async render() {

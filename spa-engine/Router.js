@@ -21,7 +21,7 @@ class Router {
         return parsedRoutes[route];
     }
 
-    get component() {
+    get Component() {
         const componentName = this.componentName;
         return componentName ? new this.routes[componentName]()
             : new this.routes['/error']();

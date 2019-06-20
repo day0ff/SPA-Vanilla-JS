@@ -1,8 +1,9 @@
 import {Component} from "../../spa-engine/Component.js";
 
-class Button extends Component {
+class NextPostButton extends Component {
+
     nextPost() {
-        console.log(location.hash);
+        location.hash = location.hash.replace(/\d$/g, +location.hash.match(/\d$/g)[0] + 1);
     }
 
     async render() {
@@ -14,4 +15,4 @@ class Button extends Component {
     }
 }
 
-export default Button;
+export default NextPostButton;

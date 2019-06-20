@@ -1,5 +1,5 @@
 "use strict";
-import {router} from './router/Router.js';
+import {router} from './spa-engine/Router.js';
 import Navbar from './views/components/Navbar.js';
 import Home from './views/pages/Home.js';
 import Post from './views/pages/Post.js';
@@ -19,8 +19,11 @@ const App = async () => {
     const article = null || document.querySelector('article');
     const footer = null || document.querySelector('footer');
 
-    await new Navbar().parent(header);
-    await router.component.parent(article);
+    header.innerHTML = await new Navbar().component;
+
+    article.innerHTML = await router.Component.component;
+    await router.Component.afterRender();
+
     footer.innerHTML = null;
 
 };

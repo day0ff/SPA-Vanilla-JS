@@ -1,4 +1,4 @@
-import {Component} from '../../comonent/Component.js';
+import {Component} from '../../spa-engine/Component.js';
 import {jsonPlaceholder} from '../../services/json.placeholder.js';
 
 class Home extends Component{
@@ -13,10 +13,6 @@ class Home extends Component{
                 </ul>
             </section>
         `;
-    }
-
-    afterRender(){
-        console.log('Execute after render method.');
     }
 
 }
