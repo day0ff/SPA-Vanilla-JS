@@ -19,10 +19,10 @@ const App = async () => {
     const article = null || document.querySelector('article');
     const footer = null || document.querySelector('footer');
 
-    header.innerHTML = await new Navbar().component;
+    header.innerHTML = await new Navbar().component();
 
-    article.innerHTML = await router.Component.component;
-    await router.Component.afterRender();
+    article.innerHTML = await router.Component.component();
+    router.Component.afterRender && await router.Component.afterRender();
 
     footer.innerHTML = null;
 

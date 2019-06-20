@@ -15,12 +15,12 @@ class Post extends Component {
         this.events = [this.removeParagraph];
 
         return `
-            <section class="section" onclick="this.removeParagraph">
+            <section class="section" onclick="this.removeParagraph()">
                 <h1>Post Id: ${post.id}</h1>
                 <p>Post Title: ${post.title} </p>
                 <p>Post Content: ${post.body} </p>
                 <p>Post Author Id: ${post.userId} </p>
-                ${await new Button().component}
+                ${await new Button().component('Next')}
             </section>
         `
     }
