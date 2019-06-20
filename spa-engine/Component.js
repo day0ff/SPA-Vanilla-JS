@@ -6,14 +6,12 @@ export class Component {
     set events(events) {
         this._events = events.map(event => event.toString().replace(/(\r\n|\n|\r)/gm, " ").replace(/\s+/g, " "))
             .reduce((acc, event) => {
-                // const key = 'this.' + event.match(/^(.*)(?=\(.*\)\s?{)/g);
-                // const value = event.match(/(?<={)(.*)(?=})/g);
-
                 const name = event.match(/^(.*)(?=\(.*\)\s?{)/g);
-                const parameter = event.match(/(?<=\()(.*)(?=\)\s?{)/g);
+                const params = event.match(/(?<=\()(.*)(?=\)\s?{)/g);
+                const parameters = params && params[0].split(',');
                 const code = event.match(/(?<={)(.*)(?=})/g);
-                console.log(name, parameter, code);
-                return ({...acc, [name]: {name, parameter, code}});
+
+                return ({...acc, [name]: {name, parameters, code}});
             }, {});
     }
 
@@ -35,29 +33,36 @@ export class Component {
 
     parseEvents(content) {
         const contentEvents = content.match(/(?<=onclick=")(.*)(?=")/g);
-        console.log(contentEvents);
         contentEvents && contentEvents.forEach(contentEvent => {
-            console.log('contentEvent', contentEvent);
-
             const name = contentEvent.match(/(?<=^this.)(.*)(?=\()/g);
-            const parameter = contentEvent.match(/(?<=\()(.*)(?=\)$)/g);
-            console.log(name, parameter);
+            const params = contentEvent.match(/(?<=\()(.*)(?=\)$)/g);
+            const parameters = params && params[0].split(',');
 
             if (contentEvent.includes('this.') && this.events[name]) {
-                console.log('convertType', this.convertType(parameter[0]));
-                const code = this.events[name].code[0].replace(this.events[name].parameter[0], this.convertType(parameter[0]));
+                let code = this.events[name].code[0];
 
-                console.log('code', code);
+                parameters && parameters
+                    .forEach((parameter, index) => {
+                        code = code.replace(this.events[name].parameters[index], this.convertType(parameter));
+                    });
                 content = content.replace(contentEvent, code);
-                console.log(content)
             }
         });
         return content;
     }
 
+    parseHTML(content) {
+        if (typeof content === 'string')
+            return new DOMParser().parseFromString(content, 'text/html').body.firstChild;
+        return content;
+    };
+
     convertType(value) {
-        if (typeof +value === 'number') return +value;
-        if (value === 'null') return null;
-        return `'${value}'`;
+        try {
+            return JSON.parse(value);
+        } catch (error) {
+            return value && `'${value}'`;
+        }
+
     }
 }

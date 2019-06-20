@@ -2,17 +2,16 @@ import {Component} from "../../spa-engine/Component.js";
 
 class NextPostButton extends Component {
 
-    nextPost(id) {
-
-        location.hash = '#/post/' + (id + 5);
+    nextPost(first, second) {
+        location.hash = '#/post/' + (first + second);
     }
 
     async render(title) {
         this.events = [this.nextPost];
-        const id = 10;
+        const post = [4, 7];
 
         return `
-            <button onclick="this.nextPost(${id})">${title}</button>
+            <button onclick="this.nextPost(${post})">${title}</button>
         `
     }
 }
