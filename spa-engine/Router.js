@@ -48,7 +48,7 @@ class Router {
     }
 
     isActive(hash){
-        return router.componentRoute === hash.slice(1) ? 'active' : '';
+        return this.componentRoute === hash.slice(1) ? 'active' : '';
     }
 }
 
