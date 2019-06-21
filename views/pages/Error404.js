@@ -1,13 +1,12 @@
 import {Component} from '../../spa-engine/Component.js';
 
-class Error404 extends Component{
+class Error404 extends Component {
     async render() {
-        let view = `
-            <section class="section">
-                <h1> 404 Error </h1>
+        return `
+            <section>
+                <h1>404 Error</h1>
             </section>
         `;
-        return view
     }
 }
 

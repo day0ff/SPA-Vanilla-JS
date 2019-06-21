@@ -2,11 +2,13 @@
 import {router} from './spa-engine/Router.js';
 import Navbar from './views/components/Navbar.js';
 import Home from './views/pages/Home.js';
+import Posts from './views/pages/Posts.js';
 import Post from './views/pages/Post.js';
 import Error404 from './views/pages/Error404.js';
 
 const routes = {
     '/home': Home,
+    '/post': Posts,
     '/post/:id': Post,
     '/error': Error404
 };
